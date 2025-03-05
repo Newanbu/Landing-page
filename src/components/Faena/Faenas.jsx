@@ -13,7 +13,7 @@ const fadeIn = {
 const MotionBox = motion(Box);
 const MotionButton = motion(Button);
 
-const Certificaciones = () => {
+const Faena = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCert, setSelectedCert] = useState(null);
 
@@ -29,24 +29,29 @@ const Certificaciones = () => {
 
   const certificaciones = [
     {
-      title: "ISO 14001: 2004",
-      description: "ISO 14001:2004 tiene el propósito de apoyar la aplicación de un plan de manejo ambiental en cualquier organización del sector público o privado.",
-      image: "/sustainability1.webp"
+      title: "Observador de conductas",
+      description: "El Programa de Seguridad Conductual está centrado en identificar conductas por medio de una observación en terreno, pretendiendo observar conductas seguras, con el objetivo de reforzar y generar reconocimiento, aumentando su probabilidad y frecuencia en el futuro, igualmente, identificar conductas peligrosas que puedan poner en riesgo la vida de los trabajadores, con el fin de corregir y ejecutar acciones correctivas y preventivas inmediatas, disminuyendo su ocurrencia en el futuro.",
+      image: "/Faena1.webp"
     },
     {
-      title: "OHSAS 18001: 2007",
-      description: "OHSAS 18001:2007 contempla Evaluación de Higiene y Seguridad Ocupacional, siendo un estándar internacional que permite a una organización controlar sus riesgos y mejorar el desempeño.",
-      image: "/sustainability2.webp"
+      title: "Tour Chuquicamata",
+      description: "Este tour ofrece la oportunidad imperdible de conocer la Mina de Chuquicamata y su Campamento de forma gratuita, como un servicio a la comunidad nacional e internacional que facilita CODELCO División Chuquicamata. Durante el tour se recorre el campamento minero, se participa en una charla que explica el procesamiento del cobre y se observa el rajo de la mina más grande del mundo, incluyendo el movimiento de los enormes camiones de extracción. El tour habitual se realiza de Lunes a Viernes y su recorrido inicia a las 13:00 horas con el check in de pasajeros y una charla introductoria y de seguridad, retornado a las 16:30 horas aproximadamente. El lugar de reunión es en la Oficina de Visitas de Tour Chuquicamata ubicada en Avenida Granaderos 4025 en Calama. Los Guías de Tour están capacitados para brindar un servicio de calidad y se realiza simultáneamente en Español e Inglés. Para reservar las visitas se debe enviar una solicitud mediante correo electrónico a visitas@codelco.cl para asegurar su cupo y retornarle información detallada importante sobre el tour. Las visitas tienen restricción para menores de 7 años y mujeres con más de 5 meses de embarazo. Si desea mayor información puede llamar al teléfono 55 2 322 122, donde será un gusto atenderle.",
+      image: "/Faena5.webp"
     },
     {
-      title: "ISO 9001: 2008",
-      description: "ISO 9001:2008 es la base del sistema de gestión de calidad, una norma internacional que establece los elementos de administración de calidad con los que una empresa debe contar para mejorar la calidad de sus productos o servicios.",
-      image: "/sustainability3.webp"
+      title: "Levantamiento de brecha",
+      description: "Trabajos relacionados con el PESSO, toma de fotografías, búsqueda de información técnica, apoyo técnico a campañas publicitarias, asistencia técnica de terreno, recepción de E-200 de las empresas, normalización de documentación Divisional, diseño gráfico de charlas, apoyo presentaciones",
+      image: "/Faena4.webp"
     },
     {
-      title: "Responsabilidad Social Corporativa",
-      description: "Serving Consultores LTDA. integra la calidad, salud, seguridad y cuidado del medio ambiente con la ética empresarial, los derechos humanos y la lucha contra la corrupción, promoviendo el desarrollo sostenible.",
-      image: "/RSC.webp"
+        title: "Servicio Mantención",
+        description: "Mantención y/o reparación de la infraestructura de la Muestrera, Grupo electrógeno, Sistema de agua potable, agua industrial y alcantarillado existente, campamento, etc.",
+        image: "/Faena6.webp"
+    },
+    {
+        title: "Señaletica",
+        description: "Suministro, instalación y mantenimiento integral de señalización vial en calles y caminos dentro de recintos industriales de DCH. Nuestro servicio garantiza la correcta visibilidad, seguridad y durabilidad de la señalización, cumpliendo con normativas vigentes y asegurando una adecuada orientación y prevención de riesgos en entornos de alto tránsito",
+        image: "/Trabajo6.webp"
     }
   ];
 
@@ -72,13 +77,14 @@ const Certificaciones = () => {
 
   {/* Título */}
   <Heading fontSize={{ base: "xl", md: "2xl" }} color="teal.600" textAlign="center">
-    Políticas de la Empresa
+    Servicios
   </Heading>
 </motion.div>
 
         <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}>
           <Text textAlign="center" mt={2} fontSize={{ base: "sm", md: "md" }} color="gray.600">
-            Nuestras certificaciones reflejan nuestro compromiso con la calidad, seguridad y sostenibilidad.
+          Ejecutamos nuestras operaciones en faena con un enfoque en eficiencia, seguridad y cumplimiento normativo, 
+          garantizando soluciones confiables y adaptadas a entornos industriales exigentes.
           </Text>
         </motion.div>
       </Flex>
@@ -164,4 +170,4 @@ const Certificaciones = () => {
   );
 };
 
-export default Certificaciones;
+export default Faena;

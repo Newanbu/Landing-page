@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button,Flex,Text, Box, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure } from "@chakra-ui/react";
 import { Carousel } from "react-responsive-carousel";
+import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Diagram from "./Diagrama";
 
@@ -8,6 +9,15 @@ import Diagram from "./Diagrama";
 const fadeInVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
+const slideInUp = {
+    hidden: { opacity: 0, y: 100 }, // 🔹 Inicia desde abajo con opacidad 0
+    visible: { 
+        opacity: 1, 
+        y: 0, 
+        transition: { duration: 0.8, ease: "easeOut" } // 🔹 Suaviza la animación
+    }
 };
 
 const Inicio = () => {
@@ -18,17 +28,17 @@ const Inicio = () => {
         {
             title: "Alta Calidad",
             description: "Ofrecemos soluciones con los más altos estándares de calidad para garantizar la excelencia en cada proyecto.",
-            image: "src/assets/Trabajo1.jpeg"
+            image: "/Trabajo1.webp"
         },
         {
             title: "Mejoras Continuas",
             description: "Nuestro equipo se mantiene en constante aprendizaje y actualización, asegurando soluciones innovadoras y efectivas para cada desafío.",
-            image: "src/assets/Trabajo2.jpeg"
+            image: "/Trabajo2.webp"
         },
         {
             title: "Tecnología Avanzada",
             description: "Utilizamos tecnología de vanguardia para ofrecer soluciones innovadoras y eficientes a nuestros clientes.",
-            image: "src/assets/Trabajo3.jpeg"
+            image: "/Trabajo3.webp"
         }
     ];
 
@@ -36,22 +46,22 @@ const Inicio = () => {
         {
             title: "ISO 14001: 2004",
             description: "ISO 14001:2004, tiene el propósito de apoyar la aplicación de un plan de manejo ambiental en cualquier organización del sector público o privado.",
-            image: "src/assets/sustainability1.png"
+            image: "/sustainability1.webp"
         },
         {
             title: "OHSAS 18001: 2007",
             description: "OHSAS 18001:2007, contempla Evaluación de Higiene y Seguridad Ocupacional, siendo un estándar internacional el cual define los requisitos relacionados a los sistemas de higiene y seguridad lo cual le permite a una organización controlar sus riesgos y mejorar el desempeño.",
-            image: "src/assets/sustainability2.png"
+            image: "/sustainability2.webp"
         },
         {
             title: "ISO 9001: 2008",
             description: "ISO 9001:2008, es la base del sistema de gestion de la calidad ya que es una norma internacional y que se centra en todos los elementos de administración de calidad con los que una empresa debe contar para tener un sistema efectivo que le permita administrar y mejorar la calidad de sus productos o servicios.",
-            image: "src/assets/sustainability3.png"
+            image: "/sustainability3.webp"
         },
         {
             title: "Responsabilidad Social Corporativa",
             description: "La responsabilidad social corporativa de Serving Consultores LTDA. abarca la calidad, salud, seguridad y cuidado del medio ambiente, así como la ética empresarial, los derechos humanos, la no discriminación y la lucha contra la corrupción. Tenemos como objetivo el desarrollo sostenible para nuestros clientes, empleados y las comunidades en las que operamos mediante el equilibrio de los resultados financieros y la responsabilidad social de las empresas dentro de nuestra esfera de influencia.",
-            image: "src/assets/RSC.png"
+            image: "/RSC.webp"
         }
     ];
 
@@ -59,12 +69,12 @@ const Inicio = () => {
         {
             title: "Visión",
             description: "Ser reconocidos por nuestra agilidad en superar las expectativas de nuestros clientes al crear valor sustentable.",
-            image: "src/assets/vision.png"
+            image: "/vision.webp"
         },
         {
             title: "Misión",
             description: "Proveer en forma confiable, rápida y transparente, la gestión de servicios a la industria minera, en equilibrio con el entorno donde nos encontremos.",
-            image: "src/assets/mision.png"
+            image: "/mision.webp"
         }
     ];
 
@@ -79,7 +89,7 @@ const Inicio = () => {
                 className="text-center mb-10 mt-20 text-4xl font-bold"
             >
                 <Box className="mt-6">
-                    <Image src="src/assets/logo_transparente.png" alt="Logo Serving" className="mx-auto" style={{ backgroundColor: "transparent" }} />
+                    <Image src="/logo_transparente.webp" alt="Logo Serving" className="mx-auto" style={{ backgroundColor: "transparent" }} />
                 </Box>
                 <h1 className="text-4xl font-bold text-gray-800">Bienvenido a Serving Consultores</h1>
                 <p className="mt-4 text-lg text-gray-600">Descubre nuestros servicios y soluciones innovadoras</p>
@@ -90,42 +100,77 @@ const Inicio = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                variants={fadeInVariants}
+                variants={slideInUp} // 🔹 Usa la nueva animación de entrada
                 className="w-full max-w-screen-xl mt-10"
             >
-                <Carousel showThumbs={false} autoPlay infiniteLoop>
-                    <div>
-                        <Image src="src/assets/serving2.jpeg" alt="Slide 1" borderRadius="lg" height="500px" width="100%" objectFit="cover" />
-                    </div>
-                    <div>
-                        <Image src="src/assets/Trabajo7.jpeg" alt="Slide 2" borderRadius="lg" height="500px" width="100%" objectFit="cover" />
-                    </div>
-                    <div>
-                        <Image src="src/assets/Trabajo6.jpeg" alt="Slide 3" borderRadius="lg" height="500px" width="100%" objectFit="cover" />
-                    </div>
-                </Carousel>
+                <Box 
+                    borderRadius="lg" 
+                    overflow="hidden" 
+                    boxShadow="lg"
+                    p={2}
+                >
+                    <Carousel 
+                        showThumbs={false} 
+                        autoPlay 
+                        infiniteLoop 
+                        className="shadow-lg"
+                    >
+                        <div>
+                            <Image 
+                                src="/serving2.webp" 
+                                alt="Slide 1" 
+                                borderRadius="lg" 
+                                height="500px" 
+                                width="100%" 
+                                objectFit="cover" 
+                            />
+                        </div>
+                        <div>
+                            <Image 
+                                src="/Trabajo7.webp" 
+                                alt="Slide 2" 
+                                borderRadius="lg" 
+                                height="500px" 
+                                width="100%" 
+                                objectFit="cover" 
+                            />
+                        </div>
+                        <div>
+                            <Image 
+                                src="/Trabajo6.webp" 
+                                alt="Slide 3" 
+                                borderRadius="lg" 
+                                height="500px" 
+                                width="100%" 
+                                objectFit="cover" 
+                            />
+                        </div>
+                    </Carousel>
+                </Box>
             </motion.div>
 
+
             <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInVariants}
-            className="mt-20 text-3xl flex justify-center"
-        >
-            <motion.button
-                whileHover={{ scale: 1.2, boxShadow: "0px 0px 25px rgba(255, 255, 255, 0.8)" }}  
-                whileTap={{ scale: 0.9 }}   
-                animate={{
-                    backgroundColor: ["#ff0000", "#ff6600", "#ffcc00", "#33cc33", "#0099ff", "#9900cc", "#ff0000"], // Colores llamativos
-                    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" } 
-                }}
-                className="px-10 py-5 m-2 text-2xl font-bold text-white rounded-2xl shadow-lg transition-all focus:outline-none focus:ring-4 focus:ring-yellow-400 border-none"
-                onClick={onOpen}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeInVariants}
+                className="m-10 p-10 text-3xl flex justify-center"  // 🔹 Se agregó padding (p-6)
             >
-                ✨ Conócenos ✨
-            </motion.button>
-        </motion.div>
+                <motion.button
+                    whileHover={{ scale: 1.2, boxShadow: "0px 0px 25px rgba(255, 255, 255, 0.8)" }}  
+                    whileTap={{ scale: 0.9 }}   
+                    animate={{
+                        backgroundColor: ["#001f3f", "#0074D9", "#39CCCC", "#3D99F5", "#4FC3F7", "#00BFFF", "#001f3f"], // 🔹 Tonos azul y celeste
+                        transition: { duration: 5, repeat: Infinity, ease: "easeInOut" } 
+                    }}
+                    className="m-2 px-6 text-2xl font-bold text-white rounded-2xl shadow-lg transition-all focus:outline-none focus:ring-4 focus:ring-blue-400 border-none"
+                    
+                    onClick={onOpen}
+                >
+                    Sobre Nosotros
+                </motion.button>
+            </motion.div>
 
 
 
@@ -136,7 +181,7 @@ const Inicio = () => {
                 variants={fadeInVariants}
                 className="text-center mt-16 text-3xl font-bold"
             >
-                <h2 className="text-3xl font-bold text-gray-800">Nuestros Servicios</h2>
+                <h2 className="text-3xl font-bold text-gray-800">Beneficios</h2>
             </motion.div>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-6">
@@ -155,6 +200,28 @@ const Inicio = () => {
                     </motion.div>
                 ))}
             </div>
+            <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeInVariants}
+                className="m-10 p-10 text-3xl flex justify-center"  // 🔹 Se agregó padding (p-6)
+            >
+                <motion.button
+                    whileHover={{ scale: 1.2, boxShadow: "0px 0px 25px rgba(255, 255, 255, 0.8)" }}  
+                    whileTap={{ scale: 0.9 }}   
+                    animate={{
+                        backgroundColor: ["#001f3f", "#0074D9", "#39CCCC", "#3D99F5", "#4FC3F7", "#00BFFF", "#001f3f"], // 🔹 Tonos azul y celeste
+                        transition: { duration: 5, repeat: Infinity, ease: "easeInOut" } 
+                    }}
+                    className="m-2 px-6 py-3 text-2xl font-bold text-white rounded-2xl shadow-lg transition-all focus:outline-none focus:ring-4 focus:ring-blue-400 border-none"
+                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                >
+                   <Link to="/servicios"> Descubre Nuestro Servicios </Link>
+                </motion.button>
+            </motion.div>
+
+
 
 
             <motion.div 
@@ -211,7 +278,6 @@ const Inicio = () => {
                         >
                             <Image src={cert.image} alt={cert.title} boxSize="150px" width="100%" objectFit="contain" className="mx-auto mb-4" />
                             <h3 className="text-xl font-semibold text-green-700">{cert.title}</h3>
-                            <p className="mt-2 text-green-600">{cert.description}</p>
                         </motion.div>
                     ))}
                 </div>
@@ -273,8 +339,9 @@ const Inicio = () => {
                             px={6}
                             mx={2}
                             _hover={{ bg: "teal.600", color: "white" }}
+                            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                         >
-                            📩 ¡Contáctanos!
+                            <Link to="/contacto-denuncia"> Contáctanos!</Link>
                         </Button>
                 </ModalFooter>
             </ModalContent>

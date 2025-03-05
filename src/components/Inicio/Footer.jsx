@@ -12,7 +12,7 @@ const Footer = () => {
             >
                 {/* Logo y Dirección */}
                 <VStack align={{ base: "center", md: "start" }} spacing={3} mb={{ base: 6, md: 0 }}>
-                    <Image src="src/assets/logo_transparente.png" alt="Logo Serving" w={{ base: 24, md: 32 }} />
+                    <Image src="/logo_transparente.webp" alt="Logo Serving" w={{ base: 24, md: 32 }} />
                     <Text fontSize="sm">Chorrillos 937, Calama</Text>
                     <Text fontSize="sm">Teléfono: +56 55 254 00 84</Text>
                 </VStack>
@@ -20,8 +20,8 @@ const Footer = () => {
                 {/* Contactos */}
                 <VStack align="start" spacing={2} textAlign={{ base: "center", md: "left" }}>
                     <Heading as="h3" size="sm" mb={2}>Contacto</Heading>
-                    <Text fontSize="sm">Elias Miranda: +56 9 3460 2057</Text>
                     <Text fontSize="sm">Cristian Jimenez: +56 9 8596 7857</Text>
+                    <Text fontSize="sm">Elias Miranda: +56 9 3460 2057</Text>
                     <Text fontSize="sm">
                         Email general: <Link href="mailto:administracion@servingcl.org" color="teal.300">
                             administracion@servingcl.org

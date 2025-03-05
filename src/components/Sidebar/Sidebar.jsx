@@ -1,16 +1,89 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { 
     Button, Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, 
     DrawerCloseButton, VStack, useDisclosure, IconButton, Accordion, AccordionItem, 
     AccordionButton, AccordionPanel, Box, Heading, Flex, Menu, MenuButton, 
-    MenuList, MenuItem, useMediaQuery 
+    MenuList, MenuItem, useMediaQuery, Modal, ModalOverlay, ModalContent, 
+    ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, 
+    FormLabel, Input, Textarea, Select, useToast, Image
 } from "@chakra-ui/react";
 import { HamburgerIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import {Link} from "react-router-dom"
+import emailjs from "@emailjs/browser";
 
 const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isOpen: isModalOpen, onOpen: openModal, onClose: closeModal } = useDisclosure();
     const [isDesktop] = useMediaQuery("(min-width: 1024px)"); // Detecta si la pantalla es grande
+    const toast = useToast();
+
+    const [formData, setFormData] = useState({
+        tipo: "contacto", 
+        categoriaDenuncia: "",
+        nombre: "",
+        email: "",
+        telefono: "",
+        mensaje: "",
+        personas: ""
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (!formData.nombre || !formData.email || !formData.mensaje || (formData.tipo === "denuncia" && !formData.categoriaDenuncia)) {
+            toast({
+                title: "Error",
+                description: "Por favor completa todos los campos requeridos.",
+                status: "error",
+                duration: 3000,
+                isClosable: true
+            });
+            return;
+        }
+
+        const emailParams = {
+            tipo: formData.tipo || "Contacto",
+            nombre: formData.nombre || "No proporcionado",
+            email: formData.email || "No proporcionado",
+            telefono: formData.telefono || "No especificado",
+            personas: formData.personas || "No especificado",
+            categoriaDenuncia: formData.categoriaDenuncia || "N/A",
+            mensaje: formData.mensaje || "Mensaje vacío"
+        };
+
+        emailjs.send(
+            "service_61ebmsx",
+            "template_3rs5ovi",
+            emailParams,
+            "tlOrInwcGki5BJT2N"
+        ).then(
+            (response) => {
+                toast({
+                    title: "Mensaje enviado",
+                    description: "Tu mensaje ha sido enviado con éxito.",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: true
+                });
+                setFormData({ tipo: "contacto", categoriaDenuncia: "", nombre: "", email: "", telefono: "", mensaje: "", personas: "" });
+                closeModal();
+            },
+            (error) => {
+                toast({
+                    title: "Error",
+                    description: "No se pudo enviar el mensaje.",
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true
+                });
+            }
+        );
+    };
 
     const menuItems = [
         { title: "Inicio", link: "/" },
@@ -28,12 +101,12 @@ const Navbar = () => {
             submenu: true,
             submenuItems: [
                 { title: "Sustentabilidad", link: "/sustentabilidad" },
-                { title: "Faena", link: "/operacion-faena" }
+                { title: "Servicios", link: "/servicios" }
             ]
         },
         {
-            title: "Contactos",
-            link:"/contacto-denuncia"
+            title: "Contacto",
+            action: openModal // 🔹 Ahora abre el modal en lugar de navegar a otra página
         },
         {
             title: "Intranet",
@@ -44,7 +117,6 @@ const Navbar = () => {
     return (
         <>
             {isDesktop ? (
-                // 📌 Navbar para pantallas grandes (fixed en la pantalla)
                 <Flex 
                     as="nav" 
                     bg="gray.800" 
@@ -56,14 +128,12 @@ const Navbar = () => {
                     top="0"
                     left="0"
                     width="100%"
-                    zIndex=""
+                    zIndex="1000"
                 >
-                    {/* Logo */}
                     <Link to="/">
-                        <img src="src/assets/logo_transparente.png" alt="Logo" width="120px" />
+                        <img src="/logo_transparente.webp" alt="Logo" width="120px" />
                     </Link>
 
-                    {/* Menú principal */}
                     <Flex gap={6}>
                         {menuItems.map((item, index) => (
                             item.submenu ? (
@@ -79,7 +149,8 @@ const Navbar = () => {
                                                 to={subItem.link} 
                                                 bg="gray.800"
                                                 color="white"
-                                                _hover={{ bg: "white", color: "blue.600" }} // Cambia el color al pasar el mouse
+                                                _hover={{ bg: "white", color: "blue.600" }}
+                                                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                                             >
                                                 {subItem.title}
                                             </MenuItem>
@@ -89,8 +160,9 @@ const Navbar = () => {
                             ) : (
                                 <Button 
                                     key={index} 
-                                    as={Link} 
-                                    to={item.link} 
+                                    as={item.link ? Link : undefined}
+                                    onClick={item.action || undefined}
+                                    to={item.link}
                                     variant="ghost" 
                                     color="white"
                                     _hover={{ bg: "gray.700" }}
@@ -102,7 +174,6 @@ const Navbar = () => {
                     </Flex>
                 </Flex>
             ) : (
-                // 📌 Menú hamburguesa para dispositivos móviles
                 <>
                     <IconButton 
                         icon={<HamburgerIcon />} 
@@ -118,66 +189,24 @@ const Navbar = () => {
                     <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="xs">
                         <DrawerOverlay />
                         <DrawerContent bg="gray.800" color="white">
-                            <DrawerCloseButton aria-label="Cerrar menú de navegación" color="white" />
-                            <DrawerHeader borderBottomWidth="1px" borderColor="gray.700">
-                                <Heading as="h2" size="lg">Menú</Heading>
+                            <DrawerCloseButton color="white" />
+                            <DrawerHeader textAlign="center">
+                                <Heading size="lg">Menú</Heading>
                             </DrawerHeader>
                             <DrawerBody>
-                                <VStack as="nav" align="start" spacing={4} role="navigation">
-                                    <Box as="figure" w="full" textAlign="center" mb={4}>
-                                        <img 
-                                            src="src/assets/logo_transparente.png"  
-                                            alt="Logo de Serving Sistemas" 
-                                            className="mx-auto w-32 sm:w-40 md:w-48 max-w-full h-auto"
-                                        />
-                                    </Box>
-
+                                <VStack spacing={4} align="center">
                                     {menuItems.map((item, index) => (
-                                        <Box key={index} w="full" as="section">
-                                            {item.submenu ? (
-                                                <Accordion allowToggle>
-                                                    <AccordionItem border="none">
-                                                        <h2>
-                                                            <AccordionButton _expanded={{ bg: "gray.700" }}>
-                                                                <Flex flex="1" textAlign="left" align="center" fontWeight="bold">
-                                                                    {item.title}
-                                                                    <ChevronDownIcon ml={2} />
-                                                                </Flex>
-                                                            </AccordionButton>
-                                                        </h2>
-                                                        <AccordionPanel>
-                                                            {item.submenuItems.map((subItem, subIndex) => (
-                                                                <Button 
-                                                                    key={subIndex} 
-                                                                    as={Link} 
-                                                                    to={subItem.link} 
-                                                                    onClick={onClose} 
-                                                                    w="full" 
-                                                                    variant="ghost"
-                                                                    color="white"
-                                                                    bg="gray.800"
-                                                                    _hover={{ bg: "white", color: "blue.600" }} // Cambio de color en hover
-                                                                >
-                                                                    {subItem.title}
-                                                                </Button>
-                                                            ))}
-                                                        </AccordionPanel>
-                                                    </AccordionItem>
-                                                </Accordion>
-                                            ) : (
-                                                <Button 
-                                                    as={Link} 
-                                                    to={item.link} 
-                                                    onClick={onClose} 
-                                                    w="full" 
-                                                    variant="ghost"
-                                                    color="white"
-                                                    _hover={{ bg: "gray.700" }}
-                                                >
-                                                    {item.title}
-                                                </Button>
-                                            )}
-                                        </Box>
+                                        <Button 
+                                            key={index} 
+                                            as={item.link ? Link : undefined}
+                                            onClick={item.action || onClose}
+                                            to={item.link}
+                                            variant="ghost"
+                                            color="white"
+                                            _hover={{ bg: "gray.700" }}
+                                        >
+                                            {item.title}
+                                        </Button>
                                     ))}
                                 </VStack>
                             </DrawerBody>
@@ -185,6 +214,44 @@ const Navbar = () => {
                     </Drawer>
                 </>
             )}
+
+            {/* 🔹 Modal para Contacto */}
+            <Modal isOpen={isModalOpen} onClose={closeModal} isCentered>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Contacto</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <form onSubmit={handleSubmit}>
+                            <VStack spacing={4}>
+                                <FormControl isRequired>
+                                    <FormLabel>Nombre</FormLabel>
+                                    <Input type="text" name="nombre" value={formData.nombre} onChange={handleChange} />
+                                </FormControl>
+
+                                <FormControl isRequired>
+                                    <FormLabel>Email</FormLabel>
+                                    <Input type="email" name="email" value={formData.email} onChange={handleChange} />
+                                </FormControl>
+
+                                <FormControl isRequired>
+                                    <FormLabel>telefono</FormLabel>
+                                    <Input type="number" name="telefono" value={formData.telefono} onChange={handleChange} />
+                                </FormControl>
+
+                                <FormControl isRequired>
+                                    <FormLabel>Mensaje</FormLabel>
+                                    <Textarea name="mensaje" value={formData.mensaje} onChange={handleChange} />
+                                </FormControl>
+
+                                <Button type="submit" colorScheme="teal" width="full">
+                                    Enviar
+                                </Button>
+                            </VStack>
+                        </form>
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
         </>
     );
 };

@@ -35,7 +35,7 @@ const BuenasPracticas = () => {
     {
       title: "Recomendación de DPF y Check Engine",
       description: "Para el buen funcionamiento del vehículo, debe conducirse entre 2.000 y 3.000 RPM.",
-      image: "src/assets/engine1.jpg"
+      image: "/engine1.webp"
     },
     {
       title: "Recomendación en la Conducción de Vehículos 4×4",
@@ -43,7 +43,7 @@ const BuenasPracticas = () => {
         "El 4×4 no se debe aplicar innecesariamente, por ejemplo, al bajar a la ciudad en caminos pavimentados, rmes o secos.\n\n" +
         "Para activar la 4×4 high o low, detenga el vehículo completamente, presione el pedal de freno, presione el pedal de embrague y gire el control 4×4.\n\n" +
         "Para desactivar la 4×4, el vehículo debe estar detenido y se debe retroceder un poco en marcha atrás para desengancharla.",
-      image: "src/assets/engine2.jpg"
+      image: "/engine2.webp"
     },
     {
       title: "Cambio Electrónico de Marchas",
@@ -51,7 +51,7 @@ const BuenasPracticas = () => {
         "2WD: Tracción en el eje trasero solamente.\n\n" +
         "4×4 HIGH: Potencia en los ejes delanteros y traseros para aumentar tracción. Se utiliza en caminos de bichuta donde se necesita mayor velocidad, con un máximo de 72 km/hr.\n\n" +
         "4×4 LOW: Potencia en los ejes delantero y trasero con reducción, para disminuir la velocidad y aumentar la fuerza de tracción. Se usa en caminos de arena, barro o nieve con una velocidad máxima de 30 km/hr.",
-      image: "src/assets/engine3.webp"
+      image: "/engine3.webp"
     },
   ];
 
@@ -68,7 +68,7 @@ const BuenasPracticas = () => {
     {/* Logo */}
     <motion.div initial="hidden" animate="visible" variants={fadeIn}>
       <Image 
-        src="src/assets/logo_transparente.png" 
+        src="/logo_transparente.webp" 
         alt="Logo de la Empresa" 
         w={{ base: 12, md: 16 }} 
         mt={1} // Espaciado ajustado

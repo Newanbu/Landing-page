@@ -39,7 +39,7 @@ const Leyes = () => {
       - Financiamiento del terrorismo.\n
       - Cohecho.\n\n
       Todos los colaboradores y ejecutivos están comprometidos con el cumplimiento de este modelo.`,
-      image: "src/assets/ley20393.jpg"
+      image: "/ley20393.webp"
     },
     {
       key: "leyKarin",
@@ -50,7 +50,7 @@ const Leyes = () => {
       - **Descendente:** De un superior a un subordinado.\n
       - **Ascendente:** De empleados hacia un supervisor.\n\n
       Fomentamos un ambiente de respeto e integridad para todos.`,
-      image: "src/assets/leykarin.jpg"
+      image: "/leykarin.webp"
     }
   ];
 
@@ -67,7 +67,7 @@ const Leyes = () => {
           {/* Logo */}
           <motion.div initial="hidden" animate="visible" variants={fadeIn}>
             <Image 
-              src="src/assets/logo_transparente.png" 
+              src="/logo_transparente.webp" 
               alt="Logo de la Empresa" 
               w={{ base: 10, md: 14, lg: 16 }} 
             />
@@ -94,18 +94,18 @@ const Leyes = () => {
       </motion.div>
 
       {/* Lista de Leyes en Cards Responsivas */}
-      <Flex wrap="wrap" justify="center" gap={4} px={{ base: 3, md: 6 }}>
+      <Flex wrap="wrap" justify="center" gap={6} px={{ base: 3, md: 6 }}>
         {policies.map((policy, index) => (
           <motion.div 
             key={index} 
             initial="hidden" 
             animate="visible" 
             variants={slideInLeft} 
-            style={{ width: "100%", maxWidth: "420px" }}
+            style={{ width: "100%", maxWidth: "500px" }} // 🔹 Ajuste de ancho responsivo
           >
             <Box
               w="full"
-              p={4}
+              p={6}  // 🔹 Más padding interno para evitar que el texto toque los bordes
               borderRadius="md"
               shadow="md"
               bg="gray.200"
@@ -118,7 +118,7 @@ const Leyes = () => {
               <Image 
                 src={policy.image} 
                 alt={`Imagen de ${policy.title}`} 
-                w="100%" maxH="200px" objectFit="cover" borderRadius="md" mb={4}
+                w="100%" maxH="250px" objectFit="cover" borderRadius="md" mb={4}
               />
 
               <Button
@@ -140,8 +140,8 @@ const Leyes = () => {
       <Modal isOpen={isOpen} onClose={closeModal} isCentered size="lg">
         <ModalOverlay />
         <ModalContent 
-          maxW={{ base: "95vw", md: "80vw" }} 
-          maxH="80vh" 
+          maxW={{ base: "95vw", md: "80vw", lg: "60vw" }} 
+          maxH="90vh" // 🔹 Ajuste del alto máximo para mejor scroll en móviles
           overflowY="auto"
           as={motion.div} 
           initial={{ scale: 0.9, opacity: 0 }} 
@@ -169,6 +169,7 @@ const Leyes = () => {
                 textAlign="justify" 
                 fontSize={{ base: "sm", md: "md" }}
                 lineHeight="1.6"
+                px={{ base: 3, md: 6 }} // 🔹 Ajuste de padding para no tocar bordes
               >
                 {selectedPolicy?.description}
               </Text>
