@@ -1,9 +1,11 @@
+import { useCallback } from "react";
 import { motion } from "framer-motion";
-import { Button,Flex,Text, Box, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure } from "@chakra-ui/react";
+import { Button,Flex,Text, Box, Image, Modal, ModalOverlay,Heading, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure } from "@chakra-ui/react";
 import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Diagram from "./Diagrama";
+
 
 
 const fadeInVariants = {
@@ -20,7 +22,10 @@ const slideInUp = {
     }
 };
 
+
+
 const Inicio = () => {
+
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -80,6 +85,7 @@ const Inicio = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+                    
             {/* Hero Section */}
             <motion.div 
                 initial="hidden"
@@ -149,7 +155,6 @@ const Inicio = () => {
                 </Box>
             </motion.div>
 
-
             <motion.div 
                 initial="hidden"
                 whileInView="visible"
@@ -166,13 +171,41 @@ const Inicio = () => {
                     }}
                     className="m-2 px-6 text-2xl font-bold text-white rounded-2xl shadow-lg transition-all focus:outline-none focus:ring-4 focus:ring-blue-400 border-none"
                     
-                    onClick={onOpen}
+                    onClick={()=>{
+                        onOpen()
+                    }}
                 >
                     Sobre Nosotros
                 </motion.button>
             </motion.div>
 
-
+            <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeInVariants}
+                className="text-center mt-16 text-3xl font-bold"
+            >
+                <h2 className="text-3xl font-bold text-gray-800">Filosofía de la empresa</h2>
+            </motion.div>
+                 {/* Filosofía de la Empresa */}
+                 <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeInVariants}
+                className="p-6 bg-white rounded-lg shadow-lg text-center max-w-4xl mt-20"
+            >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {filosofia.map((item, index) => (
+                        <div key={index} className="p-4 bg-gray-100 rounded-lg shadow text-center">
+                            <Image src={item.image} alt={item.title} borderRadius="md" boxSize="250px" objectFit="cover" className="mx-auto mb-4" />
+                            <Heading size="md"> {item.title} </Heading>
+                            <p className="mt-2 text-gray-600">{item.description}</p>
+                        </div>
+                    ))}
+                </div>
+            </motion.div>
 
             <motion.div 
                 initial="hidden"
@@ -195,8 +228,8 @@ const Inicio = () => {
                         className="p-6 bg-white rounded-lg shadow-lg text-center"
                     >
                         <Image src={servicio.image} alt={servicio.title} borderRadius="md" boxSize="250px" objectFit="cover" className="mx-auto mb-4" />
-                        <h2 className="text-xl font-semibold text-gray-700">{servicio.title}</h2>
-                        <p className="mt-2 text-gray-500">{servicio.description}</p>
+                        <Heading size="md" > {servicio.title} </Heading>
+                        <p className="mt-2 text-gray-600">{servicio.description}</p>
                     </motion.div>
                 ))}
             </div>
@@ -221,37 +254,6 @@ const Inicio = () => {
                 </motion.button>
             </motion.div>
 
-
-
-
-            <motion.div 
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeInVariants}
-                className="text-center mt-16 text-3xl font-bold"
-            >
-                <h2 className="text-3xl font-bold text-gray-800">Filosofía de la empresa</h2>
-            </motion.div>
-                 {/* Filosofía de la Empresa */}
-                 <motion.div 
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeInVariants}
-                className="p-6 bg-white rounded-lg shadow-lg text-center max-w-4xl mt-20"
-            >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {filosofia.map((item, index) => (
-                        <div key={index} className="p-4 bg-gray-100 rounded-lg shadow text-center">
-                            <Image src={item.image} alt={item.title} borderRadius="md" boxSize="250px" objectFit="cover" className="mx-auto mb-4" />
-                            <h3 className="text-lg font-semibold text-gray-700">{item.title}</h3>
-                            <p className="mt-2 text-gray-600">{item.description}</p>
-                        </div>
-                    ))}
-                </div>
-            </motion.div>
-
             <motion.div 
                 initial="hidden"
                 whileInView="visible"
@@ -266,7 +268,7 @@ const Inicio = () => {
             {/* Sustentabilidad y Certificaciones */}
             <div className="mt-16 bg-green-200 py-12 px-6 w-full text-center">
 
-                <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div className="mt-6 grid grid-cols-1 sm:grid-cols-4 gap-6">
                     {certificaciones.map((cert, index) => (
                         <motion.div 
                             key={index} 
@@ -285,34 +287,36 @@ const Inicio = () => {
 
 
 
-        <Modal isOpen={isOpen} onClose={onClose} isCentered size={{ base: "full", md: "6xl" }}>
-            <ModalOverlay />
-            <ModalContent w={{ base: "95%", md: "80%" }} maxW="6xl">
-                <ModalHeader textAlign="center" fontSize={{ base: "xl", md: "2xl" }}>
-                ¿Quiénes Somos?
-                </ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                <Flex direction={{ base: "column", md: "row" }} align="center" justify="center">
-                    
-                    {/* Diagrama */}
-                    <Box 
+            <Modal isOpen={isOpen} onClose={onClose} isCentered size={{ base: "full", md: "6xl" }}>
+    <ModalOverlay />
+    <ModalContent w={{ base: "95%", md: "80%" }} maxW="6xl" maxH="80vh">
+        <ModalHeader textAlign="center" fontSize={{ base: "xl", md: "2xl" }}>
+            ¿Quiénes Somos?
+        </ModalHeader>
+        <ModalCloseButton />
+        
+        {/* Se agregó overflowY para hacer scroll si el contenido es grande */}
+        <ModalBody overflowY="auto">
+            <Flex direction={{ base: "column", md: "row" }} align="center" justify="center">
+                
+                {/* Diagrama */}
+                <Box 
                     flex="2" 
                     p={3} 
                     w={{ base: "100%", md: "60%" }} 
                     h={{ base: "auto", md: "500px" }} 
                     mb={{ base: 4, md: 0 }}
-                    >
+                >
                     <Diagram />
-                    </Box>
+                </Box>
 
-                    {/* Descripción */}
-                    <Box 
+                {/* Descripción */}
+                <Box 
                     flex="1" 
                     p={{ base: 3, md: 5 }} 
                     textAlign="justify" 
                     w={{ base: "100%", md: "40%" }} 
-                    >
+                >
                     <Text fontSize={{ base: "md", md: "lg" }} fontWeight="bold" mb={4} textAlign="center">
                         Nuestra Empresa
                     </Text>
@@ -325,27 +329,28 @@ const Inicio = () => {
                         además de ofrecer oportunidades a nuevos talentos. Su trabajo se basa en cuatro valores clave: 
                         interacción y convivencia, mejora continua, adaptación al cambio y colaboración con el cliente.
                     </Text>
-                    </Box>
-                </Flex>
-                </ModalBody>
+                </Box>
+            </Flex>
+        </ModalBody>
 
-                <ModalFooter justifyContent="center">
-                <Button colorScheme="red" onClick={onClose}>Cerrar</Button>
-                <Button 
-                            colorScheme="teal" 
-                            as="a" 
-                            href="/contacto-denuncia" 
-                            fontWeight="bold" 
-                            px={6}
-                            mx={2}
-                            _hover={{ bg: "teal.600", color: "white" }}
-                            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                        >
-                            <Link to="/contacto-denuncia"> Contáctanos!</Link>
-                        </Button>
-                </ModalFooter>
-            </ModalContent>
-            </Modal>
+        <ModalFooter justifyContent="center">
+            <Button colorScheme="red" onClick={onClose}>Cerrar</Button>
+            <Button 
+                colorScheme="teal" 
+                as="a" 
+                href="/contacto-denuncia" 
+                fontWeight="bold" 
+                px={6}
+                mx={2}
+                _hover={{ bg: "teal.600", color: "white" }}
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
+                <Link to="/contacto"> Contáctanos!</Link>
+            </Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
     </div>
 
       

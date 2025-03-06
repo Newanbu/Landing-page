@@ -85,7 +85,7 @@ const BuenasPracticas = () => {
 
       {/* Descripción */}
       <motion.div initial="hidden" animate="visible" variants={fadeIn}>
-        <Text textAlign="center" mb={4} px={4} fontSize={{ base: "sm", md: "md" }}>
+        <Text textAlign="left" mb={4} px={4} fontSize={{ base: "md", md: "md" }}>
           Seguir estas buenas prácticas garantizará un manejo seguro, eficiente y responsable, 
           ayudando a prolongar la vida útil de los vehículos y mejorar la seguridad de todos en el camino.
         </Text>

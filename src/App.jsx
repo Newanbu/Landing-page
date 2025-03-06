@@ -11,6 +11,9 @@ import ContactoDenuncia from "./components/Contacto/contacto";
 import ScrollToTopButton from "./components/Inicio/BotonFlotante";
 import Faena from "./components/Faena/Faenas";
 import Navbar from "./components/sidebar/sidebar";
+import Contacto from "./components/Contacto/contacto";
+import Denuncia from "./components/Contacto/contacto-denuncia";
+import Consulta from "./components/Contacto/contacto-consulta";
 
 function App() {
   return (
@@ -23,7 +26,9 @@ function App() {
           <Route path="/politicas" element={<Politicas />} />
           <Route path="/leyes" element={<Leyes />} />
           <Route path="/sustentabilidad" element={<Certificaciones />} />
-          <Route path="/contacto-denuncia" element={<ContactoDenuncia />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/denuncia" element={<Denuncia />} />
+          <Route path="/consulta" element={<Consulta />} />
           <Route path="/servicios" element={<Faena />} />
         </Routes>
         <ScrollToTopButton/>

@@ -13,9 +13,9 @@ const fadeIn = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
-const Contacto = () => {
+const Denuncia = () => {
   const [formData, setFormData] = useState({
-    tipo: "Contacto", 
+    tipo: "Denuncia", // "contacto" o "denuncia"
     categoriaDenuncia: "",
     nombre: "",
     email: "",
@@ -36,7 +36,7 @@ const Contacto = () => {
     e.preventDefault();
 
     // Validación: evitar campos vacíos
-    if (!formData.nombre || !formData.email || !formData.mensaje || (formData.tipo === "denuncia" && !formData.categoriaDenuncia)) {
+    if (!formData.nombre || !formData.email || !formData.mensaje || (formData.tipo === "Denuncia" && !formData.categoriaDenuncia)) {
         toast({
             title: "Error",
             description: "Por favor completa todos los campos requeridos.",
@@ -49,7 +49,7 @@ const Contacto = () => {
 
     // Crear objeto con datos asegurando que no haya valores "undefined"
     const emailParams = {
-        tipo: formData.tipo|| "Contacto",
+        tipo: formData.tipo || "Contacto",
         nombre: formData.nombre || "No proporcionado",
         email: formData.email || "No proporcionado",
         personas: formData.personas || "No especificado",
@@ -60,9 +60,9 @@ const Contacto = () => {
     // Enviar con EmailJS
     emailjs.send(
         "service_61ebmsx",   // 🔹 Reemplaza con tu SERVICE_ID
-        "template_3rs5ovi",  // 🔹 Reemplaza con tu TEMPLATE_ID
+        "template_eycuv8d",  // 🔹 Reemplaza con tu TEMPLATE_ID
         emailParams,
-        "tlOrInwcGki5BJT2N"       // 🔹 Reemplaza con tu USER_ID
+        "tlOrInwcGki5BJT2N"  // 🔹 Reemplaza con tu PUBLIC_KEY
     ).then(
         (response) => {
             console.log("SUCCESS!", response.status, response.text);
@@ -73,7 +73,7 @@ const Contacto = () => {
                 duration: 3000,
                 isClosable: true
             });
-            setFormData({ tipo: "Contacto", categoriaDenuncia: "", nombre: "", email: "", mensaje: "", personas: "" }); // 🔹 Limpia el formulario
+            setFormData({ tipo: "Denuncia", categoriaDenuncia: "", nombre: "", email: "", mensaje: "", personas: "" }); // 🔹 Limpia el formulario
         },
         (error) => {
             console.log("FAILED...", error);
@@ -87,6 +87,7 @@ const Contacto = () => {
         }
     );
 };
+
   return (
     <MotionBox 
       w="full" maxW="600px" p={6} m={10} borderRadius="lg" shadow="lg" bg="white"
@@ -110,18 +111,30 @@ const Contacto = () => {
 
         {/* Título */}
         <Heading as="h2" size="lg" color="teal.600" textAlign="center">
-          Contacto
+          Denuncias ( Solo a gerente )
         </Heading>
       </motion.div>
 
       <form onSubmit={handleSubmit}>
         <VStack spacing={4}>
-
-          {/* Seleccionar tipo de mensaje */}
+          {/* Tipo de mensaje */}
           <FormControl isRequired>
-            <FormLabel>Tipo de Mensaje</FormLabel>
-                <Input type="text" name="tipo" value={formData.tipo} disabled></Input>
+            <FormLabel>Tipo de mensaje</FormLabel>
+                <Input type="text" value={formData.tipo} disabled ></Input>
           </FormControl>
+
+          {/* Opciones de denuncia solo si se elige "Denuncia" */}
+          {formData.tipo === "Denuncia" && (
+            <FormControl isRequired>
+              <FormLabel>Categoría de Denuncia</FormLabel>
+              <Select name="categoriaDenuncia" value={formData.categoriaDenuncia} onChange={handleChange}>
+                <option value="">Selecciona una opción</option>
+                <option value="Modelo prevención de delitos">Modelo prevención de delitos</option>
+                <option value="Código de ética">Código de ética</option>
+                <option value="Acoso sexual laboral y/o violencia en el trabajo">Acoso sexual laboral y/o violencia en el trabajo</option>
+              </Select>
+            </FormControl>
+          )}
 
           <FormControl isRequired>
             <FormLabel>Nombre</FormLabel>
@@ -133,11 +146,18 @@ const Contacto = () => {
             <Input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="tucorreo@email.com" />
           </FormControl>
 
+          <FormControl>
+            <FormLabel>Personas involucradas (Opcional)</FormLabel>
+            <Input type="text" name="personas" value={formData.personas} onChange={handleChange} placeholder="Nombre de las personas involucradas" />
+          </FormControl>
+
+          {/* Mensaje */}
           <FormControl isRequired>
             <FormLabel>Mensaje</FormLabel>
             <Textarea name="mensaje" value={formData.mensaje} onChange={handleChange} placeholder="Escribe tu mensaje aquí..." rows={5} />
           </FormControl>
 
+          {/* Botón de enviar */}
           <Button type="submit" colorScheme="teal" width="full" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             Enviar Mensaje
           </Button>
@@ -148,4 +168,4 @@ const Contacto = () => {
   );
 };
 
-export default Contacto;
+export default Denuncia;
