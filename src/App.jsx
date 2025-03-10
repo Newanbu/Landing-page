@@ -14,7 +14,7 @@ import Navbar from "./components/sidebar/sidebar";
 import Contacto from "./components/Contacto/contacto";
 import Denuncia from "./components/Contacto/contacto-denuncia";
 import Consulta from "./components/Contacto/contacto-consulta";
-
+import Faq from "./components/Contacto/Faq";
 function App() {
   return (
     <ChakraProvider> {/* Mueve ChakraProvider al nivel superior */}
@@ -30,6 +30,7 @@ function App() {
           <Route path="/denuncia" element={<Denuncia />} />
           <Route path="/consulta" element={<Consulta />} />
           <Route path="/servicios" element={<Faena />} />
+          <Route path="/faq" element={<Faq />} />
         </Routes>
         <ScrollToTopButton/>
 

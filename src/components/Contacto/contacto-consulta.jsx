@@ -148,7 +148,7 @@ const Consulta = () => {
 
           <FormControl isRequired>
             <FormLabel>Telefono</FormLabel>
-            <Input type="number" name="telefono" value={formData.telefono} onChange={handleChange} placeholder="tucorreo@email.com" />
+            <Input type="number" name="telefono" value={formData.telefono} onChange={handleChange} placeholder="Número Teléfono" />
           </FormControl>
 
           {/* Mensaje */}

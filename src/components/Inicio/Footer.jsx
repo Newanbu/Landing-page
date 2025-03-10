@@ -1,5 +1,7 @@
 import React from "react";
 import { Box, Flex, Text, Link, VStack, Heading, Image } from "@chakra-ui/react";
+import { RxLinkedinLogo } from "react-icons/rx";
+import { MdConnectWithoutContact } from "react-icons/md";
 
 const Footer = () => {
     return (
@@ -56,9 +58,22 @@ const Footer = () => {
                         allowFullScreen
                     ></iframe>
                 </Box>
-            </Flex>
 
-            {/* Línea separadora y derechos reservados */}
+                                <VStack align={{ base: "center", md: "start" }} spacing={2} textAlign={{ base: "center", md: "left" }}>
+                                    <Heading as="h3" size="sm" mb={2}>Redes Sociales</Heading>
+                                    <Flex align="center" justify="center" spacing={2} gap={4}>
+                                        <Link href="https://www.linkedin.com/company/serving-consultores-ltda/" isExternal>
+                                            <RxLinkedinLogo size={24} color="white" alt="Linkedin" />
+                                        </Link>
+                                        <Link href="https://www.chiletrabajos.cl/encuentra-un-empleo?8=Serving+Consultores+Ltda" isExternal>
+                                            <MdConnectWithoutContact size={24} color="white" alt="Chiletrabajos" />
+                                        </Link>
+                                    </Flex>  
+                                </VStack>
+
+                            </Flex>
+
+                            {/* Línea separadora y derechos reservados */}
             <Box mt={6} borderTop="1px" borderColor="gray.600" pt={4}>
                 <Text fontSize="xs">© {new Date().getFullYear()} Serving Consultores LTDA. Todos los derechos reservados.</Text>
             </Box>

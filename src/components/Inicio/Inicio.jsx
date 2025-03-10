@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { motion } from "framer-motion";
 import { Button,Flex,Text, Box, Image, Modal, ModalOverlay,Heading, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure } from "@chakra-ui/react";
 import { Carousel } from "react-responsive-carousel";
@@ -285,8 +284,6 @@ const Inicio = () => {
                 </div>
             </div>
 
-
-
             <Modal isOpen={isOpen} onClose={onClose} isCentered size={{ base: "full", md: "6xl" }}>
     <ModalOverlay />
     <ModalContent w={{ base: "95%", md: "80%" }} maxW="6xl" maxH="80vh">
@@ -338,7 +335,6 @@ const Inicio = () => {
             <Button 
                 colorScheme="teal" 
                 as="a" 
-                href="/contacto-denuncia" 
                 fontWeight="bold" 
                 px={6}
                 mx={2}

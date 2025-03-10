@@ -15,9 +15,6 @@ const Navbar = () => {
     const [isDesktop] = useMediaQuery("(min-width: 1024px)");
 
 
-
-
-
     const menuItems = [
         {
             title: "Compañía",
@@ -44,6 +41,10 @@ const Navbar = () => {
                 {title: "Denuncias", link: "/denuncia"},
                 {title: "Consultas", link: "/consulta"},
             ]
+        },
+        {
+            title: "FAQ",
+            link: "/faq",
         },
         {
             title: "Intranet",
