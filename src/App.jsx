@@ -7,14 +7,14 @@ import BuenasPracticas from "./components/Buenas-Practica/BuenasPracticas";
 import Politicas from "./components/Politicas/PoliticaIntegra";
 import Leyes from "./components/Leyes/Leye";
 import Certificaciones from "./components/Operaciones/Certificados";
-import ContactoDenuncia from "./components/Contacto/contacto";
 import ScrollToTopButton from "./components/Inicio/BotonFlotante";
 import Faena from "./components/Faena/Faenas";
-import Navbar from "./components/sidebar/sidebar";
-import Contacto from "./components/Contacto/contacto";
+import Navbar from "./components/Sidebar/Sidebar";
+import Contacto from "./components/Contacto/Contacto";
 import Denuncia from "./components/Contacto/contacto-denuncia";
-import Consulta from "./components/Contacto/contacto-consulta";
+import Consulta from "./components/Contacto/Contacto-consulta";
 import Faq from "./components/Contacto/Faq";
+
 function App() {
   return (
     <ChakraProvider> {/* Mueve ChakraProvider al nivel superior */}
@@ -33,9 +33,7 @@ function App() {
           <Route path="/faq" element={<Faq />} />
         </Routes>
         <ScrollToTopButton/>
-
         <Footer/>
-
       </BrowserRouter>
     </ChakraProvider>
   );
