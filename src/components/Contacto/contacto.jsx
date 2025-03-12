@@ -16,9 +16,10 @@ const fadeIn = {
 const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1MB en bytes
 
 const Contacto = () => {
+
+  
   const [formData, setFormData] = useState({
     tipo: "Contacto", 
-    categoriaDenuncia: "",
     nombre: "",
     email: "",
     mensaje: "",
@@ -29,7 +30,7 @@ const Contacto = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formRef = useRef();
   const toast = useToast();
-
+  const fileInputRef = useRef(null); // Referencia al input de archivo
   useEffect(() => {
     // Inicializar EmailJS
     emailjs.init("tlOrInwcGki5BJT2N");
@@ -168,7 +169,6 @@ const Contacto = () => {
         nombre: formData.nombre,
         email: formData.email,
         personas: formData.personas || "No especificado",
-        categoriaDenuncia: formData.categoriaDenuncia || "N/A",
         mensaje: formData.mensaje,
         attachment: fileData,
         attachment_name: selectedFile ? selectedFile.name : "",
@@ -196,12 +196,17 @@ const Contacto = () => {
 
       // Limpiar el formulario
       setFormData({
+        from_name: "",
+        to_name: "Administrador",
         tipo: "Contacto",
-        categoriaDenuncia: "",
         nombre: "",
         email: "",
+        personas: "",
         mensaje: "",
-        personas: ""
+        attachment: "",
+        attachment_name: "",
+        content_type: "",
+        isImage: ""
       });
       setSelectedFile(null);
       if (formRef.current) {
@@ -217,6 +222,19 @@ const Contacto = () => {
         duration: 5000,
         isClosable: true
       });
+      setFormData({
+        from_name: "",
+        to_name: "Administrador",
+        tipo: "Contacto",
+        nombre: "",
+        email: "",
+        personas: "",
+        mensaje: "",
+        attachment: "",
+        attachment_name: "",
+        content_type: "",
+        isImage: ""
+      })
     } finally {
       setIsSubmitting(false);
     }
@@ -268,32 +286,59 @@ const Contacto = () => {
           </FormControl>
 
           <FormControl>
-            <FormLabel>Archivo (máx. 1MB)</FormLabel>
-            <Text fontSize="sm" color="gray.600" mb={2}>
-              Formatos permitidos: JPG, PNG, WEBP, PDF
-            </Text>
-            <Input
-              type="file"
-              name="file"
-              onChange={handleFileChange}
-              margin={5}
-              accept=".pdf,.jpg,.jpeg,.png,.webp"
-              sx={{
-                '::file-selector-button': {
-                  height: '100%',
-                  padding: '0 20px',
-                  background: 'teal.500',
-                  border: 'none',
-                  borderRadius: 'md',
-                  color: 'white',
-                  cursor: 'pointer',
-                  '&:hover': {
-                    bg: 'teal.600',
-                  },
-                },
-              }}
-            />
-          </FormControl>
+  <FormLabel>Archivo (máx. 1MB)</FormLabel>
+  <Text fontSize="sm" color="gray.600" mb={2}>
+    Formatos permitidos: JPG, PNG, WEBP, PDF
+  </Text>
+  
+  {/* Contenedor con flexbox para alinear el input y el botón */}
+  <Box display="flex" alignItems="center" gap={3}>
+    <Input
+      type="file"
+      name="file"
+      onChange={handleFileChange}
+      ref={fileInputRef} // Agregar referencia al input de archivo
+      accept=".pdf,.jpg,.jpeg,.png,.webp"
+      flex="1" // Hace que el input ocupe todo el espacio disponible
+      sx={{
+        '::file-selector-button': {
+          height: '100%',
+          padding: '0 20px',
+          background: 'teal.500',
+          border: 'none',
+          borderRadius: 'md',
+          color: 'white',
+          cursor: 'pointer',
+          '&:hover': {
+            bg: 'teal.600',
+          },
+        },
+      }}
+    />
+
+    {/* Botón para eliminar archivo */}
+    <Button 
+      onClick={() => {
+        setSelectedFile(null); // Elimina el archivo seleccionado
+        if (fileInputRef.current) {
+          fileInputRef.current.value = ""; // Resetea el input de archivo
+        }
+      }} 
+      colorScheme="red" 
+      size="sm" 
+      isDisabled={!selectedFile}
+    >
+      Eliminar
+    </Button>
+  </Box>
+
+  {selectedFile && (
+    <Text fontSize="sm" color="gray.700" mt={2}>
+      Archivo seleccionado: {selectedFile.name}
+    </Text>
+  )}
+</FormControl>
+
 
           <FormControl isRequired>
             <FormLabel>Mensaje</FormLabel>
