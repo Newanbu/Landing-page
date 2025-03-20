@@ -1,19 +1,19 @@
 import "./App.css";
-import Inicio from "./components/Inicio/Inicio.jsx";
-import Footer from "./components/Inicio/Footer.jsx";
+import Inicio from "./components/Inicio/inicio.jsx";
+import Footer from "./components/Inicio/footer.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import BuenasPracticas from "./components/Buenas-Practica/BuenasPracticas.jsx";
-import Politicas from "./components/Politicas/PoliticaIntegra.jsx";
-import Leyes from "./components/Leyes/Leye.jsx";
-import Certificaciones from "./components/Operaciones/Certificados.jsx";
-import ScrollToTopButton from "./components/Inicio/BotonFlotante.jsx";
-import Faena from "./components/Faena/Faenas.jsx";
-import Navbar from "./components/Sidebar/Sidebar.jsx";
-import Contacto from "./components/Contacto/Contacto-formulario.jsx";
+import BuenasPracticas from "./components/Buenas-Practica/buenasPracticas.jsx";
+import Politicas from "./components/Politicas/politicaIntegra.jsx";
+import Leyes from "./components/Leyes/leye.jsx";
+import Certificaciones from "./components/Operaciones/certificados.jsx";
+import ScrollToTopButton from "./components/Inicio/botonFlotante.jsx";
+import Faena from "./components/Faena/faenas.jsx";
+import Navbar from "./components/Sidebar/sidebar.jsx";
+import Contacto from "./components/Contacto/contacto-formulario.jsx";
 import Denuncia from "./components/Contacto/contacto-denuncia.jsx";
-import Consulta from "./components/Contacto/Contacto-consulta.jsx";
-import Faq from "./components/Contacto/Faq.jsx";
+import Consulta from "./components/Contacto/contacto-consulta.jsx";
+import Faq from "./components/Contacto/faq.jsx";
 
 function App() {
   return (
