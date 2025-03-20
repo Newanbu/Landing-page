@@ -4,6 +4,7 @@ import {
   ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter 
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import {Link} from "react-router-dom"
 
 const fadeIn = {
     hidden: { opacity: 0, y: 30 },
@@ -154,16 +155,22 @@ const Faena = () => {
               </Text>
             </Flex>
           </ModalBody>
+          <Flex justifyContent="space-between" w="100%" p={4}>
+              <MotionButton colorScheme="green">
+                <Link to="/contacto">Contratar</Link>
+              </MotionButton>
 
-          <ModalFooter>
-            <MotionButton 
-              colorScheme="red" 
-              whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-              onClick={closeModal}
-            >
-              Cerrar
-            </MotionButton>
-          </ModalFooter>
+              <MotionButton 
+                colorScheme="red" 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+                onClick={closeModal}
+              >
+                Cerrar
+              </MotionButton>
+            </Flex>
+
+          
         </ModalContent>
       </Modal>
     </Box>

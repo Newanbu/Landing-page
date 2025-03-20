@@ -72,7 +72,7 @@ const Certificaciones = () => {
 
   {/* Título */}
   <Heading fontSize={{ base: "xl", md: "2xl" }} color="teal.600" textAlign="center">
-    Políticas de la Empresa
+    Sustentabilidad
   </Heading>
 </motion.div>
 

@@ -20,6 +20,7 @@ const Contacto = () => {
   
   const [formData, setFormData] = useState({
     tipo: "Contacto", 
+    categoria:"",
     nombre: "",
     email: "",
     mensaje: "",
@@ -166,6 +167,7 @@ const Contacto = () => {
         from_name: formData.nombre,
         to_name: "Administrador",
         tipo: formData.tipo,
+        categoria:formData.categoria,
         nombre: formData.nombre,
         email: formData.email,
         personas: formData.personas || "No especificado",
@@ -199,6 +201,7 @@ const Contacto = () => {
         from_name: "",
         to_name: "Administrador",
         tipo: "Contacto",
+        categoria:"",
         nombre: "",
         email: "",
         personas: "",
@@ -226,6 +229,7 @@ const Contacto = () => {
         from_name: "",
         to_name: "Administrador",
         tipo: "Contacto",
+        categoria:"",
         nombre: "",
         email: "",
         personas: "",
@@ -285,59 +289,69 @@ const Contacto = () => {
             <Input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="tucorreo@email.com" />
           </FormControl>
 
+          <FormControl isRequired>
+            <FormLabel>Categoria</FormLabel>
+            <Select placeholder="Selecciona una categoría" name="categoria" value={formData.categoria} onChange={handleChange}>
+              <option value="Contacto">Contacto</option>  
+              <option value="Trabajar">Busqueda de trabajo</option>  
+              <option value="Contratar Servicio">Contratar Servicio</option>  
+              <option value="Sugerencia">Sugerencia</option>
+            </Select>              
+          </FormControl>
+
           <FormControl>
-  <FormLabel>Archivo (máx. 1MB)</FormLabel>
-  <Text fontSize="sm" color="gray.600" mb={2}>
-    Formatos permitidos: JPG, PNG, WEBP, PDF
-  </Text>
-  
-  {/* Contenedor con flexbox para alinear el input y el botón */}
-  <Box display="flex" alignItems="center" gap={3}>
-    <Input
-      type="file"
-      name="file"
-      onChange={handleFileChange}
-      ref={fileInputRef} // Agregar referencia al input de archivo
-      accept=".pdf,.jpg,.jpeg,.png,.webp"
-      flex="1" // Hace que el input ocupe todo el espacio disponible
-      sx={{
-        '::file-selector-button': {
-          height: '100%',
-          padding: '0 20px',
-          background: 'teal.500',
-          border: 'none',
-          borderRadius: 'md',
-          color: 'white',
-          cursor: 'pointer',
-          '&:hover': {
-            bg: 'teal.600',
-          },
-        },
-      }}
-    />
+            <FormLabel>Archivo (máx. 1MB)</FormLabel>
+            <Text fontSize="sm" color="gray.600" mb={2}>
+              Formatos permitidos: JPG, PNG, WEBP, PDF
+            </Text>
+    
+            {/* Contenedor con flexbox para alinear el input y el botón */}
+            <Box display="flex" alignItems="center" gap={3}>
+              <Input
+                type="file"
+                name="file"
+                onChange={handleFileChange}
+                ref={fileInputRef} // Agregar referencia al input de archivo
+                accept=".pdf,.jpg,.jpeg,.png,.webp"
+                flex="1" // Hace que el input ocupe todo el espacio disponible
+                sx={{
+                  '::file-selector-button': {
+                    height: '100%',
+                    padding: '0 20px',
+                    background: 'teal.500',
+                    border: 'none',
+                    borderRadius: 'md',
+                    color: 'white',
+                    cursor: 'pointer',
+                    '&:hover': {
+                      bg: 'teal.600',
+                    },
+                  },
+                }}
+              />
 
-    {/* Botón para eliminar archivo */}
-    <Button 
-      onClick={() => {
-        setSelectedFile(null); // Elimina el archivo seleccionado
-        if (fileInputRef.current) {
-          fileInputRef.current.value = ""; // Resetea el input de archivo
-        }
-      }} 
-      colorScheme="red" 
-      size="sm" 
-      isDisabled={!selectedFile}
-    >
-      Eliminar
-    </Button>
-  </Box>
+              {/* Botón para eliminar archivo */}
+              <Button 
+                onClick={() => {
+                  setSelectedFile(null); // Elimina el archivo seleccionado
+                  if (fileInputRef.current) {
+                    fileInputRef.current.value = ""; // Resetea el input de archivo
+                  }
+                }} 
+                colorScheme="red" 
+                size="sm" 
+                isDisabled={!selectedFile}
+              >
+                Eliminar
+              </Button>
+            </Box>
 
-  {selectedFile && (
-    <Text fontSize="sm" color="gray.700" mt={2}>
-      Archivo seleccionado: {selectedFile.name}
-    </Text>
-  )}
-</FormControl>
+            {selectedFile && (
+              <Text fontSize="sm" color="gray.700" mt={2}>
+                Archivo seleccionado: {selectedFile.name}
+              </Text>
+            )}
+        </FormControl>
 
 
           <FormControl isRequired>

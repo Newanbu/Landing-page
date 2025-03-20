@@ -45,7 +45,7 @@ const Faq = () => {
                     },
                     {
                         question: "¿Cómo puedo realizar una denuncia o consulta?",
-                        answer: "Puede realizar denuncias o consultas a través de nuestro sistema en línea en la sección de Contacto. También puede comunicarse directamente con nosotros mediante nuestros canales oficiales de comunicación."
+                        answer: "Puede realizar denuncias o consultas a través de nuestro sistema en línea en la sección de Contacto."
                     },
                     {
                         question: "¿Qué certificaciones tiene la empresa?",
@@ -55,8 +55,8 @@ const Faq = () => {
                         question: "¿Cómo puedo trabajar en Serving Consultores?",
                         answer: (
                             <>
-                                <Text mb={2}>Si está interesado en formar parte de nuestro equipo de trabajo, puede enviar su currículum vitae a través de nuestro formulario de contacto. También puede revisar las ofertas de empleo disponibles <Link to="https://www.linkedin.com/company/serving-consultores-ltda/">Haz Click Aquí</Link></Text>
-                                <Text>Para más información, puede comunicarse con nosotros a través de nuestros canales de contacto.</Text>
+                                <Text mb={2}>Si está interesado en formar parte de nuestro equipo de trabajo, puede enviar su currículum vitae a través de nuestro formulario de contacto. También puede revisar las ofertas de empleo disponibles </Text>
+                                <Link to="https://www.linkedin.com/company/serving-consultores-ltda/">Haz Click Aquí</Link>
                             </>
                         )
                     },
