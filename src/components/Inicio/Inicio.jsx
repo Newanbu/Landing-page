@@ -159,7 +159,7 @@ const Inicio = () => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeInVariants}
-                className="m-10 p-10 text-3xl flex justify-center"  // 🔹 Se agregó padding (p-6)
+                className="m-10 p-10 text-4xl  "  
             >
                 <motion.button
                     whileHover={{ scale: 1.2, boxShadow: "0px 0px 25px rgba(255, 255, 255, 0.8)" }}  
@@ -168,7 +168,7 @@ const Inicio = () => {
                         backgroundColor: ["#001f3f", "#0074D9", "#39CCCC", "#3D99F5", "#4FC3F7", "#00BFFF", "#001f3f"], // 🔹 Tonos azul y celeste
                         transition: { duration: 5, repeat: Infinity, ease: "easeInOut" } 
                     }}
-                    className="m-2 px-6 text-2xl font-bold text-white rounded-2xl shadow-lg transition-all focus:outline-none focus:ring-4 focus:ring-blue-400 border-none"
+                    className="m-10 text-2xl font-bold text-white rounded-2xl shadow-lg transition-all focus:outline-none focus:ring-4 focus:ring-blue-400 border-none"
                     
                     onClick={()=>{
                         onOpen()
@@ -198,7 +198,7 @@ const Inicio = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {filosofia.map((item, index) => (
                         <div key={index} className="p-4 bg-gray-100 rounded-lg shadow text-center">
-                            <Image src={item.image} alt={item.title} borderRadius="md" boxSize="250px" objectFit="cover" className="mx-auto mb-4" />
+                            <Image src={item.image} alt={item.title} borderRadius="md" boxSize="250px" objectFit="cover" className="mx-auto mb-4 text-black" />
                             <Heading size="md"> {item.title} </Heading>
                             <p className="mt-2 text-gray-600">{item.description}</p>
                         </div>
