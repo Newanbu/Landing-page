@@ -83,7 +83,7 @@ const Inicio = () => {
     ];
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+<div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
                     
             {/* Hero Section */}
             <motion.div 
@@ -154,6 +154,7 @@ const Inicio = () => {
                 </Box>
             </motion.div>
 
+            {/* Botón de "Sobre Nosotros" */}
             <motion.div 
                 initial="hidden"
                 whileInView="visible"
@@ -178,6 +179,7 @@ const Inicio = () => {
                 </motion.button>
             </motion.div>
 
+            {/* Filosofía de la Empresa */}
             <motion.div 
                 initial="hidden"
                 whileInView="visible"
@@ -187,8 +189,9 @@ const Inicio = () => {
             >
                 <h2 className="text-3xl font-bold text-gray-800">Filosofía de la empresa</h2>
             </motion.div>
-                 {/* Filosofía de la Empresa */}
-                 <motion.div 
+
+            {/* Categorias Filosofía de la Empresa */}
+            <motion.div 
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
@@ -206,6 +209,8 @@ const Inicio = () => {
                 </div>
             </motion.div>
 
+        
+            { /* Beneficios Section */}
             <motion.div 
                 initial="hidden"
                 whileInView="visible"
@@ -216,7 +221,8 @@ const Inicio = () => {
                 <h2 className="text-3xl font-bold text-gray-800">Beneficios</h2>
             </motion.div>
 
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-6">
+            {/* Beneficios de la Empresa */}
+            <div className="m-8  bg-white p-5  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-6">
                 {servicios.map((servicio, index) => (
                     <motion.div 
                         key={index} 
@@ -224,7 +230,7 @@ const Inicio = () => {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeInVariants}
-                        className="p-6 bg-white rounded-lg shadow-lg text-center"
+                        className="p-6 bg-zinc-100 border-0 rounded-lg shadow-lg text-center"
                     >
                         <Image src={servicio.image} alt={servicio.title} borderRadius="md" boxSize="250px" objectFit="cover" className="mx-auto mb-4" />
                         <Heading size="md" > {servicio.title} </Heading>
@@ -232,12 +238,13 @@ const Inicio = () => {
                     </motion.div>
                 ))}
             </div>
+
             <motion.div 
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeInVariants}
-                className="m-10 p-10 text-3xl flex justify-center"  // 🔹 Se agregó padding (p-6)
+                className="m-10 p-10 text-3xl " 
             >
                 <motion.button
                     whileHover={{ scale: 1.2, boxShadow: "0px 0px 25px rgba(255, 255, 255, 0.8)" }}  
@@ -284,70 +291,70 @@ const Inicio = () => {
                 </div>
             </div>
 
-            <Modal isOpen={isOpen} onClose={onClose} isCentered size={{ base: "full", md: "6xl" }}>
-    <ModalOverlay />
-    <ModalContent w={{ base: "95%", md: "80%" }} maxW="6xl" maxH="80vh">
-        <ModalHeader textAlign="center" fontSize={{ base: "xl", md: "2xl" }}>
-            ¿Quiénes Somos?
-        </ModalHeader>
-        <ModalCloseButton />
-        
-        {/* Se agregó overflowY para hacer scroll si el contenido es grande */}
-        <ModalBody overflowY="auto">
-            <Flex direction={{ base: "column", md: "row" }} align="center" justify="center">
+    <Modal isOpen={isOpen} onClose={onClose} isCentered size={{ base: "full", md: "6xl" }}>
+        <ModalOverlay />
+            <ModalContent w={{ base: "95%", md: "80%" }} maxW="6xl" maxH="80vh">
+                <ModalHeader textAlign="center" fontSize={{ base: "xl", md: "2xl" }}>
+                    ¿Quiénes Somos?
+                </ModalHeader>
+                <ModalCloseButton />
                 
-                {/* Diagrama */}
-                <Box 
-                    flex="2" 
-                    p={3} 
-                    w={{ base: "100%", md: "60%" }} 
-                    h={{ base: "auto", md: "500px" }} 
-                    mb={{ base: 4, md: 0 }}
-                >
-                    <Diagram />
-                </Box>
+                {/* Se agregó overflowY para hacer scroll si el contenido es grande */}
+                <ModalBody overflowY="auto">
+                    <Flex direction={{ base: "column", md: "row" }} align="center" justify="center">
+                        
+                        {/* Diagrama */}
+                        <Box 
+                            flex="2" 
+                            p={3} 
+                            w={{ base: "100%", md: "60%" }} 
+                            h={{ base: "auto", md: "500px" }} 
+                            mb={{ base: 4, md: 0 }}
+                        >
+                            <Diagram />
+                        </Box>
 
-                {/* Descripción */}
-                <Box 
-                    flex="1" 
-                    p={{ base: 3, md: 5 }} 
-                    textAlign="justify" 
-                    w={{ base: "100%", md: "40%" }} 
-                >
-                    <Text fontSize={{ base: "md", md: "lg" }} fontWeight="bold" mb={4} textAlign="center">
-                        Nuestra Empresa
-                    </Text>
-                    <Text fontSize={{ base: "sm", md: "md" }}>
-                        Serving Consultores LTDA es una empresa de ingeniería y consultoría fundada en 2007 en Calama, 
-                        con el objetivo de brindar servicios de calidad a la mediana y gran minería chilena. <br /><br />
-                        Su misión es proveer productos y servicios confiables e innovadores, mientras que su visión es 
-                        convertirse en un referente en ingeniería, geología y consultoría en Latinoamérica. <br /><br />
-                        Cuenta con un equipo multidisciplinario de profesionales con amplia experiencia en la industria minera, 
-                        además de ofrecer oportunidades a nuevos talentos. Su trabajo se basa en cuatro valores clave: 
-                        interacción y convivencia, mejora continua, adaptación al cambio y colaboración con el cliente.
-                    </Text>
-                </Box>
-            </Flex>
-        </ModalBody>
+                        {/* Descripción */}
+                        <Box 
+                            flex="1" 
+                            p={{ base: 3, md: 5 }} 
+                            textAlign="justify" 
+                            w={{ base: "100%", md: "40%" }} 
+                        >
+                            <Text fontSize={{ base: "md", md: "lg" }} fontWeight="bold" mb={4} textAlign="center">
+                                Nuestra Empresa
+                            </Text>
+                            <Text fontSize={{ base: "sm", md: "md" }}>
+                                Serving Consultores LTDA es una empresa de ingeniería y consultoría fundada en 2007 en Calama, 
+                                con el objetivo de brindar servicios de calidad a la mediana y gran minería chilena. <br /><br />
+                                Su misión es proveer productos y servicios confiables e innovadores, mientras que su visión es 
+                                convertirse en un referente en ingeniería, geología y consultoría en Latinoamérica. <br /><br />
+                                Cuenta con un equipo multidisciplinario de profesionales con amplia experiencia en la industria minera, 
+                                además de ofrecer oportunidades a nuevos talentos. Su trabajo se basa en cuatro valores clave: 
+                                interacción y convivencia, mejora continua, adaptación al cambio y colaboración con el cliente.
+                            </Text>
+                        </Box>
+                    </Flex>
+                </ModalBody>
 
-        <ModalFooter justifyContent="center">
-            <Button colorScheme="red" onClick={onClose}>Cerrar</Button>
-            <Button 
-                colorScheme="teal" 
-                as="a" 
-                fontWeight="bold" 
-                px={6}
-                mx={2}
-                _hover={{ bg: "teal.600", color: "white" }}
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            >
-                <Link to="/contacto"> Contáctanos!</Link>
-            </Button>
-        </ModalFooter>
-    </ModalContent>
-</Modal>
+                <ModalFooter justifyContent="center">
+                    <Button colorScheme="red" onClick={onClose}>Cerrar</Button>
+                    <Button 
+                        colorScheme="teal" 
+                        as="a" 
+                        fontWeight="bold" 
+                        px={6}
+                        mx={2}
+                        _hover={{ bg: "teal.600", color: "white" }}
+                        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                    >
+                        <Link to="/contacto"> Contáctanos!</Link>
+                    </Button>
+                </ModalFooter>
+            </ModalContent>
+    </Modal>
 
-    </div>
+</div>
 
       
     );
